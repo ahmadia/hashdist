@@ -121,6 +121,8 @@ def main(unparsed_argv, env, logger, default_config_filename=None):
                     config = load_config_file(args.config_file)
                 except ValidationError as e:
                     logger.error(str(e))
+                except IOError as e:
+                    logger.error('Missing ~/.hashdist/config.yaml - please create one manually or generate one by calling: hit init-home')
         
         ctx = HashdistCommandContext(parser, subcmd_parsers, sys.stdout, config, env, logger)
 
